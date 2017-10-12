@@ -9,7 +9,7 @@ var router = express.Router();
 var mongo = require('mongodb');
 var mongoClient = mongo.MongoClient;
 
-var url = 'mongodb://localhost:27017/user';
+var url = 'mongodb://localhost:27017/flight';
 app.use(express.static(__dirname ));
 
 app.get('/index',function(req,res){
@@ -18,11 +18,11 @@ app.get('/index',function(req,res){
 });
 
 //For fetching the data from the mongoDB
-app.get('/userDetails', function(req,res){
+app.get('/orderDetails', function(req,res){
     var newUser = {
-	email: req.query.email
+	firstname: req.query.firstname
 	};
-        console.log(req.query.email);
+        console.log(req.query.firstname);
     mongoClient.connect(url,function(err,db){
 		if (err){
 	console.error('Error occured in database');
@@ -30,12 +30,12 @@ app.get('/userDetails', function(req,res){
 
 } else{
 	console.log('Connection established '+ url);
-db.collection('users').findOne({email:newUser.email},function(err,result){
+db.collection('users').findOne({firstname:newUser.firstname},function(err,result){
 if (err){console.log(err);}
 else{
     console.log("printing results....");
  console.log(result);
- res.send(result.firstname+" ("+result.phone+") ordered ");
+  res.send("your order "+result.type+" has been placed..!!! Thanks for your order. Visit Again");
 	}
         });
         }
@@ -46,12 +46,10 @@ app.post('/index',function(req,res){
     
     console.log(req);
 	var newUser = {
-	email: req.body.email,
+	
 	firstname: req.body.firstname,
-//	lastname:req.body.lastname,
 	phone:req.body.phone,        
-//   date: req.body.date,
-//   dateTo: req.body.dateTo
+   type: req.body.type
 	};
         console.log(newUser);
 	mongoClient.connect(url,function(err,db){
@@ -61,17 +59,17 @@ app.post('/index',function(req,res){
 
 } else{
 	console.log('Connection established '+ url);
-db.collection('users').count({email:newUser.email},function(err,count){
+db.collection('users').count({firstname:newUser.firstname},function(err,count){
 if (err){console.log(err);}
 else{
-var number = count;d
+var number = count;
 if (count == 0){
 db.collection('users').insert(newUser,function(err,result){
 	if (err){
 	console.log(err);
 	} else {
 	console.log('Item Inserted');
-        res.send("Inserted records successfully "+newUser.email);
+        res.send("Inserted records successfully ");
 						db.close();
 					}
 					});

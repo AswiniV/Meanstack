@@ -26,7 +26,7 @@ and open the template in the editor.
     <div class="row vertical-center-row">
         <div class="col-md-4 col-md-offset-4">
         <div class="panel panel-primary" style="width: 400px; height: 500px;" >
-        <div class="panel-heading">Welcome User!</div>
+        <div class="panel-heading">Welcome to Starbucks!</div>
         <div class="panel-body client-left-side"></div>
 <div ng-controller="TabsDemoCtrl">
     <form  name="outerForm" class="tab-form-demo" action="/index" method="post">
@@ -37,75 +37,33 @@ and open the template in the editor.
 <!-- Write code for input text fields (firstname,lastname,email,phone) here-->  
 
 <div class="form-group">
-  <label for="FName">Enter name</label>
+  <label for="FName">Enter First Name</label>
   <input type="text" class="form-control" id="fname"
   name="firstName" placeholder="Enter First Name" required></div>
-<!--<div class="form-group">
- <label for="LName">Enter Last Name</label>
-  <input type="text" class="form-control" id="lname"
-  name="lastName" placeholder="Enter Last Name" required></div>-->
-<!--<div class="form-group">
-               <label for="email">Enter Email</label>
-  <input type="text" class="form-control" id="email"
-  name="email" placeholder="Enter Email" required></div>-->
                    <div class="form-group">
                        <label for="phone">Enter Phone Number</label>
   <input type="text" class="form-control" id="phone"
   name="phone" placeholder="Enter Phone Number" required></div>
-<!--            <button type="button"   class="btn btn-primary" ng-click="formNext()" >Next</button>-->
+ <div class="form-group">
+                       <label for="TypeofCoffe">Please select type</label>
+                       <select id="typeofcoffee">
+                           <option value="">Select</option>
+                           <option value="Cold Coffee">Cold Coffee</option>
+                           <option value="Chocolate Mocha">Chocolate Mocha</option>
+                            <option value="Hot Coffee">Hot Coffee</option>
+                            <option value="Hot Chocolate">Hot Chocolate</option>
+                            <option value="Ice Tea">Ice Tea</option>
+                       </select></div>
+
+            <button type="button"   class="btn btn-primary" ng-click="formNext()" >Next</button>
           </div>
         </ng-form>
       </uib-tab>
       <uib-tab index="1" heading="STEP 2" id="step2">
-         <ng-form name="nestedForm" ng-submit="formNext()" >
-          <div class="form-group">
-        <div class="form-group input-group">
-        <div class="row">
-        <div class="col-md-12 ">
-            <label>Select &nbsp; </label><select  id="selectedOption" ng-model="selectedOption" ng-options="option.name for option in options">
-            </select>   
-</select>
-
- <!--code for drowpdown list
-<!--// http://www.w3schools.com/angular/tryit.asp?filename=try_ng_select_selected-->
-        </div>
-        </div>
-        </div>
-       
-<!--        <div class="form-group input-group">
-        <label>Date Depart</label>
-        <div class="row">
-        <div class="col-md-8">
-       <p class="input-group">
-          <input name="dt" type="text" id="dt" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-        </p>
-        </div>
-        </div>
-          <label>Date Return</label>
-        <div class="row">
-        <div class="col-md-8">
-      <p class="input-group">
-          <input name="dt1" type="text" id="dtl" class="form-control" uib-datepicker-popup="dd-MMMM-yyyy" ng-model="dt1" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-        </p>
-        </div>
-        </div>
-        </div>-->
-             <button type="button"   class="btn btn-primary" ng-click="formNext()" >Next</button>
-          </div>
-        </ng-form>
-      </uib-tab>
-      <uib-tab index="2" heading="STEP 3" id="step3">
-           <ng-form  name="nestedForm" ng-submit="">
-               <h3 id="display"></h3>
-              <!-- Now display the firstname,lastname,email,phone, departure and arrival places on the selected dates--> 
-            
-           </ng-form>
+         <ng-form name="nestedForm" ng-submit="formNext()">
+              <h3 id="display1"></h3><br>
+           <h3 id="display"></h3>
+         </ng-form>
       </uib-tab>
     </uib-tabset>   
   </form>
@@ -125,195 +83,141 @@ and open the template in the editor.
             angular.module('ui.bootstrap.demo', ['ngAnimate', 'ui.bootstrap']);
 angular.module('ui.bootstrap.demo').controller('TabsDemoCtrl', function ($scope, $window) {
 
-  //dropdown
-   $scope.options = [
-    {
-      name: 'Choose an item',
-      value: 'Choose an item'
-    },
-    {
-      name: 'Chocolate Moca',
-      value: '3.0'
-    },
-    {
-      name: 'Vanilla BeanCream',
-      value: '3.5'
-    },
-    {
-      name: 'Hot coffee',
-      value: '2.0'
-    },
-//    {
-//      name: 'San Francisco',
-//      value: 'San Francisco'
-//    }
-  ];
-
-//  $scope.optionsTo = [
-//    {
-//      name: 'Choose a location',
-//      value: 'Choose a location'
-//    },
-//    {
-//      name: 'Boston',
-//      value: 'Boston'
-//    },
-//    {
-//      name: 'New York',
-//      value: 'New York'
-//    },
-//    {
-//      name: 'Chicago',
-//      value: 'Chicago'
-//    },
-//    {
-//      name: 'San Francisco',
-//      value: 'San Francisco'
-//    }
-//  ];
-  $scope.selectedOption = $scope.options[0];
-//  $scope.selectedOptionTo = $scope.optionsTo[0];
   
-
   //tab index
   var index = 0;
 
   $scope.formNext = function(){
       console.log(index);
       
-     if(index < 2){
-      $scope.activeForm =  index + 1;       
-     index++;
+   
      
-     if(index==2){
+     if(index==0){
+          $scope.activeForm =  index + 1; 
          $.ajax({
     method: "POST",
     url: "/index",
-//    data: { firstname :document.getElementById("fname").value, lastname :document.getElementById("lname").value,email:document.getElementById("email").value,phone:document.getElementById("phone").value,date:document.getElementById("dt").value,dateTo:document.getElementById("dtl").value}
-    data: { firstname :document.getElementById("fname").value, phone:document.getElementById("phone").value}
+    data: { firstname :document.getElementById("fname").value,phone:document.getElementById("phone").value,type:document.getElementById("typeofcoffee").value}
+    
 })
   .done(function( msg ) {
     $.ajax({
     method: "GET",
-    url: "/userDetails",
-    data: { firstname :document.getElementById("fname").value, phone:document.getElementById("phone").value}
-            //    data: { firstname :document.getElementById("fname").value, lastname :document.getElementById("lname").value,email:document.getElementById("email").value,phone:document.getElementById("phone").value,date:document.getElementById("dt").value,dateTo:document.getElementById("dtl").value}
+    url: "/orderDetails",
+        data: { firstname :document.getElementById("fname").value,phone:document.getElementById("phone").value,type:document.getElementById("typeofcoffee").value}
 })
   .done(function( msg ) {
     //alert( "Data sent " + msg );
+      document.getElementById("display1").innerHTML="Hello "+document.getElementById("fname").value+"!!";
     document.getElementById("display").innerHTML=msg;
     
   });
     
   });
      }
- }else {
-     index = 0;
  }
-
-  };
 
 
 
   //Date
-// $scope.today = function() {
-//    $scope.dt = new Date();
-//     $scope.dt1 = new Date();
-//  };
-//  $scope.today();
-//
-//  $scope.clear = function() {
-//    $scope.dt = null;
-//     $scope.dt1 = null;
-//  };
-//
-//  $scope.inlineOptions = {
-//    customClass: getDayClass,
-//    minDate: new Date(),
-//    showWeeks: true
-//  };
-//
-//  $scope.dateOptions = {
-//    dateDisabled: disabled,
-//    formatYear: 'yy',
-//    maxDate: new Date(2020, 5, 22),
-//    minDate: new Date(),
-//    startingDay: 1
-//  };
-//
-//  // Disable weekend selection
-//  function disabled(data) {
-//    var date = data.date,
-//      mode = data.mode;
-//    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
-//  }
-//
-//  $scope.toggleMin = function() {
-//    $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
-//    $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
-//  };
-//
-//  $scope.toggleMin();
-//
-//  $scope.open1 = function() {
-//    $scope.popup1.opened = true;
-//  };
-//
-//  $scope.open2 = function() {
-//       $scope.popup2.opened = true;
-////    $scope.popup2.opened = true;
-//  };
-//
-//  $scope.setDate = function(year, month, day) {
-//    $scope.dt = new Date(year, month, day);
-//     $scope.dt1 = new Date(year, month, day);
-//  };
-//
-//  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-//  $scope.format = $scope.formats[0];
-//  $scope.altInputFormats = ['M!/d!/yyyy'];
-//
-//  $scope.popup1 = {
-//    opened: false
-//  };
-//
-//  $scope.popup2 = {
-//    opened: false
-//  };
-//
-//  var tomorrow = new Date();
-//  tomorrow.setDate(tomorrow.getDate() + 1);
-//  var afterTomorrow = new Date();
-//  afterTomorrow.setDate(tomorrow.getDate() + 1);
-//  $scope.events = [
-//    {
-//      date: tomorrow,
-//      status: 'full'
-//    },
-//    {
-//      date: afterTomorrow,
-//      status: 'partially'
-//    }
-//  ];
-//
-//  function getDayClass(data) {
-//    var date = data.date,
-//      mode = data.mode;
-//    if (mode === 'day') {
-//      var dayToCheck = new Date(date).setHours(0,0,0,0);
-//
-//      for (var i = 0; i < $scope.events.length; i++) {
-//        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
-//
-//        if (dayToCheck === currentDay) {
-//          return $scope.events[i].status;
-//        }
-//      }
-//    }
-//
-//    return '';
-//  }
-//});
+ $scope.today = function() {
+    $scope.dt = new Date();
+     $scope.dt1 = new Date();
+  };
+  $scope.today();
+
+  $scope.clear = function() {
+    $scope.dt = null;
+     $scope.dt1 = null;
+  };
+
+  $scope.inlineOptions = {
+    customClass: getDayClass,
+    minDate: new Date(),
+    showWeeks: true
+  };
+
+  $scope.dateOptions = {
+    dateDisabled: disabled,
+    formatYear: 'yy',
+    maxDate: new Date(2020, 5, 22),
+    minDate: new Date(),
+    startingDay: 1
+  };
+
+  // Disable weekend selection
+  function disabled(data) {
+    var date = data.date,
+      mode = data.mode;
+    return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
+  }
+
+  $scope.toggleMin = function() {
+    $scope.inlineOptions.minDate = $scope.inlineOptions.minDate ? null : new Date();
+    $scope.dateOptions.minDate = $scope.inlineOptions.minDate;
+  };
+
+  $scope.toggleMin();
+
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+
+  $scope.open2 = function() {
+       $scope.popup2.opened = true;
+//    $scope.popup2.opened = true;
+  };
+
+  $scope.setDate = function(year, month, day) {
+    $scope.dt = new Date(year, month, day);
+     $scope.dt1 = new Date(year, month, day);
+  };
+
+  $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+  $scope.format = $scope.formats[0];
+  $scope.altInputFormats = ['M!/d!/yyyy'];
+
+  $scope.popup1 = {
+    opened: false
+  };
+
+  $scope.popup2 = {
+    opened: false
+  };
+
+  var tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  var afterTomorrow = new Date();
+  afterTomorrow.setDate(tomorrow.getDate() + 1);
+  $scope.events = [
+    {
+      date: tomorrow,
+      status: 'full'
+    },
+    {
+      date: afterTomorrow,
+      status: 'partially'
+    }
+  ];
+
+  function getDayClass(data) {
+    var date = data.date,
+      mode = data.mode;
+    if (mode === 'day') {
+      var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+      for (var i = 0; i < $scope.events.length; i++) {
+        var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+        if (dayToCheck === currentDay) {
+          return $scope.events[i].status;
+        }
+      }
+    }
+
+    return '';
+  }
+});
 
 
           </script>
